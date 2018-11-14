@@ -1,0 +1,39 @@
+{
+    "Title":"Guardians of the Galaxy Vol. 2",
+    "Year":2017,
+    "Released":"05 May 2017",
+    "Runtime":136,
+    "Genres":["Action", "Adventure", "Comedy", "Sci-Fi"],
+    "Director":{
+    	"Name":"James Gunn"
+    },
+    "Writers":[
+    	{"Name":"James Gunn", "Type":"screenplay"}
+    ],
+    "Actors":[
+    	{"Name":"Chris Pratt", "As":"..."},
+    	{"Name":"Zoe Saldana", "As":"..."},
+    	{"Name":"Dave Bautista", "As":"..."},
+    	{"Name":"Vin Diesel", "As":"..."}
+    ],
+    "Plot":"The Guardians must fight to keep their newfound family together as they unravel the mystery of Peter Quill's true parentage.",
+    "Languages":["English"],
+    "Countries":["USA"],
+    "Awards":"Nominated for 1 Oscar. Another 12 wins & 42 nominations.",
+    "Poster":"https://m.media-amazon.com/images/M/MV5BMTg2MzI1MTg3OF5BMl5BanBnXkFtZTgwNTU3NDA2MTI@._V1_SX300.jpg",
+    "Ratings":[
+        {
+            "Source":"Internet Movie Database",
+            "Value":"7.7/10",
+            "Votes":602079
+        },
+        {
+            "Source":"Rotten Tomatoes",
+            "Value":"83%"
+        },
+        {
+            "Source":"Metacritic",
+            "Value":"67/100"
+        }
+    ]
+}

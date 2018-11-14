@@ -1,0 +1,39 @@
+{
+    "Title":"Titanic",
+    "Year":1997,
+    "Released":"19 Dec 1997",
+    "Runtime":194,
+    "Genres":["Drama", "Romance"],
+    "Director":{
+    	"Name":"James Cameron"
+    },
+    "Writers":[
+    	{"Name":"James Cameron", "Type":"screenplay"} 
+    ],
+    "Actors":[
+    	{"Name":"Leonardo DiCaprio", "As":"..."},
+    	{"Name":"Kate Winslet", "As":"..."},
+    	{"Name":"Billy Zane", "As":"..."}, 
+    	{"Name":"Kathy Bates", "As":"..."}
+    ]
+    "Plot":"A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
+    "Languages":["English", "Swedish"],
+    "Countries":["USA"],
+    "Awards":"Won 11 Oscars. Another 111 wins & 77 nominations.",
+    "Poster":"https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg",
+    "Ratings":[
+        {
+            "Source":"Internet Movie Database",
+            "Value":"7.8/10",
+            "Votes":602079
+        },
+        {
+            "Source":"Rotten Tomatoes",
+            "Value":"89%"
+        },
+        {
+            "Source":"Metacritic",
+            "Value":"75/100"
+        }
+    ]
+}

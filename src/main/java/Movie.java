@@ -1,5 +1,5 @@
 import javax.json.*;
-import java.io.StringReader;
+import java.io.*;
 
 public class Movie implements Jsonable{
 
@@ -85,12 +85,15 @@ public class Movie implements Jsonable{
 
         String source;
         String value;
+        int votes = -1;
 
         @Override
         public JsonObject toJsonObject() {
             JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
             objectBuilder.add("Source", source);
             objectBuilder.add("Value", value);
+            if (votes != -1)
+                objectBuilder.add("Votes", votes);
             return objectBuilder.build();
         }
 
@@ -105,6 +108,11 @@ public class Movie implements Jsonable{
             JsonObject jObject = reader.readObject();
             this.source = jObject.getString("Source");
             this.value = jObject.getString("Value");
+            try {
+                this.votes = jObject.getInt("Votes");
+            } catch (Exception e) {
+                // f it!
+            }
         }
     }
 
@@ -130,10 +138,17 @@ public class Movie implements Jsonable{
         return arrayBuilder.build();
     }
 
-    static public JsonArray makeJsonArrayFrom(Jsonable[] arr) {
+    static public<T extends Jsonable> JsonArray makeJsonArrayFrom(T[] arr) {
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
-        for (Jsonable str: arr)
+        for (T str: arr)
             arrayBuilder.add(str.toJsonObject());
+        return arrayBuilder.build();
+    }
+
+    static public JsonArray makeJsonArrayFromStringArray(String[] arr) {
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        for (String str: arr)
+            arrayBuilder.add(str);
         return arrayBuilder.build();
     }
 
@@ -144,6 +159,15 @@ public class Movie implements Jsonable{
         return arr;
     }
 
+    public static Movie fromFile(String path) throws Exception {
+        Movie movie = new Movie();
+        InputStream fis = new FileInputStream(path);
+        JsonReader reader = Json.createReader(fis);
+        String json = reader.readObject().toString();
+        movie.fromJson(json);
+        return movie;
+    }
+
     @Override
     public JsonObject toJsonObject() {
         return Json.createObjectBuilder()
@@ -151,7 +175,7 @@ public class Movie implements Jsonable{
                 .add("Year", year)
                 .add("Released", released)
                 .add("Runtime", runtime)
-                .add("Genres", makeJsonArrayFrom(genres))
+                .add("Genres", makeJsonArrayFromStringArray(genres)) // TODO: fix
                 .add("Director", director.toJsonObject())
                 .add("Writers", makeJsonArrayFrom(writers))
                 .add("Actors", makeJsonArrayFrom(actors))
@@ -176,6 +200,7 @@ public class Movie implements Jsonable{
         this.title = jObject.getString("Title");
         this.year = jObject.getInt("Year");
         this.released = jObject.getString("Released");
+        this.runtime = jObject.getInt("Runtime");
         this.genres = toStringArr(jObject.getJsonArray("Genres"));
         this.director = new Director();
         this.director.fromJson(jObject.getJsonObject("Director").toString());
@@ -186,7 +211,6 @@ public class Movie implements Jsonable{
             this.writers[i] = new Writer();
             this.writers[i].fromJson(writersArr.getJsonObject(i).toString());
         }
-
         JsonArray actorsArr = jObject.getJsonArray("Actors");
         this.actors = new Actor[actorsArr.size()];
         for (int i = 0; i < actorsArr.size(); ++i) {
@@ -194,7 +218,7 @@ public class Movie implements Jsonable{
             this.actors[i].fromJson(actorsArr.getJsonObject(i).toString());
         }
 
-        this.plot = jObject.getString(plot);
+        this.plot = jObject.getString("Plot");
         this.languages = toStringArr(jObject.getJsonArray("Languages"));
         this.countries = toStringArr(jObject.getJsonArray("Countries"));
         this.awards = jObject.getString("Awards");
@@ -206,5 +230,9 @@ public class Movie implements Jsonable{
             this.ratings[i] = new Rating();
             this.ratings[i].fromJson(ratingsArr.getJsonObject(i).toString());
         }
+    }
+
+    public static void main(String... args) {
+
     }
 }
