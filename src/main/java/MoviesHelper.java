@@ -1,6 +1,5 @@
 import java.util.Comparator;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -25,14 +24,14 @@ public class MoviesHelper {
 		boolean test = Arrays.asList(movies).stream().allMatch(m ->
 				Arrays.asList(m.ratings)
 						.stream()
-						.anyMatch(r -> r.source == source));
+						.anyMatch(r -> r.source.equals(source)));
 		if (!test)
 			throw new Exception("Incorrect Source: " + source);
 		return sortBy(movies, (a, b) -> {
 			List<Movie.Rating> arate = Arrays.asList(a.ratings);
 			List<Movie.Rating> brate = Arrays.asList(b.ratings);
-			arate = arate.stream().filter(r -> r.source == source).collect(Collectors.toList());
-			brate = brate.stream().filter(r -> r.source == source).collect(Collectors.toList());
+			arate = arate.stream().filter(r -> r.source.equals(source)).collect(Collectors.toList());
+			brate = brate.stream().filter(r -> r.source.equals(source)).collect(Collectors.toList());
 			return arate.get(0).value.compareTo(brate.get(0).value);
 		});
 	}
@@ -44,12 +43,12 @@ public class MoviesHelper {
 	}
 
 	public static List<Movie> filterByDirector(Movie[] movies, String directorName) {
-		return filterBy(movies, m -> m.director.name == directorName);
+		return filterBy(movies, m -> m.director.name.equals(directorName));
 	}
 
 	public static List<Movie> filterByActor(Movie[] movies, String actorName) {
 		return filterBy(movies, m -> Arrays.asList(m.actors).stream()
-				.anyMatch(a -> a.name == actorName));
+				.anyMatch(a -> a.name.equals(actorName)));
 	}
 
 	public static List<Movie> filterByGenre(Movie[] movies, String genre) {

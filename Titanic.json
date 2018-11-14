@@ -8,14 +8,14 @@
     	"Name":"James Cameron"
     },
     "Writers":[
-    	{"Name":"James Cameron", "Type":"screenplay"} 
+    {"Name":"James Cameron", "Type":"screenplay"}
     ],
     "Actors":[
     	{"Name":"Leonardo DiCaprio", "As":"..."},
     	{"Name":"Kate Winslet", "As":"..."},
     	{"Name":"Billy Zane", "As":"..."}, 
     	{"Name":"Kathy Bates", "As":"..."}
-    ]
+    ],
     "Plot":"A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.",
     "Languages":["English", "Swedish"],
     "Countries":["USA"],
