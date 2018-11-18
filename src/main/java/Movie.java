@@ -1,120 +1,7 @@
 import javax.json.*;
 import java.io.*;
 
-public class Movie implements Jsonable{
-
-    public class Writer implements Jsonable{
-
-        String name;
-        String type;
-
-        @Override
-        public JsonObject toJsonObject() {
-            JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-            objectBuilder.add("Name", name);
-            objectBuilder.add("Type", type);
-            return objectBuilder.build();
-        }
-
-        @Override
-        public String toJsonString() {
-            return toJsonObject().toString();
-        }
-
-        @Override
-        public void fromJson(String json) {
-            JsonReader reader = Json.createReader(new StringReader(json));
-            JsonObject jObject = reader.readObject();
-            this.name = jObject.getString("Name");
-            this.type = jObject.getString("Type");
-        }
-    }
-
-    public class Director implements Jsonable{
-
-        String name;
-
-        @Override
-        public JsonObject toJsonObject() {
-            JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-            objectBuilder.add("Name", name);
-            return objectBuilder.build();
-        }
-
-        @Override
-        public String toJsonString() {
-            return toJsonObject().toString();
-        }
-
-        @Override
-        public void fromJson(String json) {
-            JsonReader reader = Json.createReader(new StringReader(json));
-            JsonObject jObject = reader.readObject();
-            this.name = jObject.getString("Name");
-        }
-    }
-
-    public class Actor implements Jsonable {
-
-        String name;
-        String as;
-
-        @Override
-        public JsonObject toJsonObject() {
-            JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-            objectBuilder.add("Name", name);
-            objectBuilder.add("As", as);
-            return objectBuilder.build();
-        }
-
-        @Override
-        public String toJsonString() {
-            return toJsonObject().toString();
-        }
-
-        @Override
-        public void fromJson(String json) {
-            JsonReader reader = Json.createReader(new StringReader(json));
-            JsonObject jObject = reader.readObject();
-            this.name = jObject.getString("Name");
-            this.as = jObject.getString("As");
-        }
-    }
-
-    public static class Rating implements Jsonable {
-
-        String source;
-        String value;
-        int votes = -1;
-
-        @Override
-        public JsonObject toJsonObject() {
-            JsonObjectBuilder objectBuilder = Json.createObjectBuilder();
-            objectBuilder.add("Source", source);
-            objectBuilder.add("Value", value);
-            if (votes != -1)
-                objectBuilder.add("Votes", votes);
-            return objectBuilder.build();
-        }
-
-        @Override
-        public String toJsonString() {
-            return toJsonObject().toString();
-        }
-
-        @Override
-        public void fromJson(String json) {
-            JsonReader reader = Json.createReader(new StringReader(json));
-            JsonObject jObject = reader.readObject();
-            this.source = jObject.getString("Source");
-            this.value = jObject.getString("Value");
-            try {
-                this.votes = jObject.getInt("Votes");
-            } catch (Exception e) {
-                // f it!
-            }
-        }
-    }
+public class Movie implements Jsonable {
 
     String title;
     int year;
@@ -160,10 +47,8 @@ public class Movie implements Jsonable{
     }
 
     public static Movie fromFile(String path) throws Exception {
+        String json = MoviesHelper.readJsonFromFile(path);
         Movie movie = new Movie();
-        InputStream fis = new FileInputStream(path);
-        JsonReader reader = Json.createReader(fis);
-        String json = reader.readObject().toString();
         movie.fromJson(json);
         return movie;
     }
@@ -175,7 +60,7 @@ public class Movie implements Jsonable{
                 .add("Year", year)
                 .add("Released", released)
                 .add("Runtime", runtime)
-                .add("Genres", makeJsonArrayFromStringArray(genres)) // TODO: fix
+                .add("Genres", makeJsonArrayFromStringArray(genres))
                 .add("Director", director.toJsonObject())
                 .add("Writers", makeJsonArrayFrom(writers))
                 .add("Actors", makeJsonArrayFrom(actors))
@@ -232,7 +117,4 @@ public class Movie implements Jsonable{
         }
     }
 
-    public static void main(String... args) {
-
-    }
 }
