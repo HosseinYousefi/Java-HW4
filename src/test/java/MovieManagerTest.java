@@ -17,7 +17,7 @@ import static com.mongodb.client.model.Filters.*;
 public class MovieManagerTest extends TestCase {
 
 
-    /*** THIS TESTS WORK ON MY COMPUTER ***\
+    /*** THESE TESTS WORK ON MY COMPUTER ***\
     MovieManager movieManager;
 
     @Before
