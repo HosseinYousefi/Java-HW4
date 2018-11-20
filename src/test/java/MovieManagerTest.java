@@ -16,12 +16,6 @@ import static com.mongodb.client.model.Filters.*;
 
 public class MovieManagerTest extends TestCase {
 
-
-    @Test
-    public void testNothingOnlyToGetTravisPassing() {
-        // WOW MUCH CODE!
-    }
-    /*** THESE TESTS WORK ON MY COMPUTER ***\
     MovieManager movieManager;
 
     @Before
@@ -55,5 +49,4 @@ public class MovieManagerTest extends TestCase {
         assertEquals(2017, year);
 
     }
-    */
 }
